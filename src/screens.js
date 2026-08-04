@@ -11,6 +11,7 @@ import { LeadForm, LeadSuccess } from './components/leadForm.js';
 import { OfferCard } from './components/offerSection.js';
 import { shareResult } from './components/shareCard.js';
 import { trackEvent } from './utils/analytics.js';
+import { submitLead } from './utils/leads.js';
 
 export const WIZARD_IDS = STEPS.map((step) => step.id);
 export const SCREEN_ORDER = ['landing', ...WIZARD_IDS, 'loading', 'result', 'lead', 'offer'];
@@ -222,6 +223,21 @@ function renderLead(container, { goNext }) {
         onSubmit: ({ email, phone }) => {
           store.setState({ lead: { email, phone, submitted: true } });
           trackEvent('lead_captured');
+
+          const totals = calculateBudget(store.getState().data);
+          const diagnostic = getDiagnostic(totals);
+          submitLead(LEAD.endpointUrl, {
+            date: new Date().toISOString(),
+            email,
+            phone,
+            revenu: totals.revenu,
+            chargesFixes: totals.chargesFixes,
+            depensesVariables: totals.depensesVariables,
+            epargneActuelle: totals.epargneActuelle,
+            tauxEpargnePct: Math.round(totals.tauxEpargne * 100),
+            diagnostic: diagnostic.key,
+          });
+
           formHolder.replaceChildren(LeadSuccess());
           setTimeout(goNext, 1400);
         },

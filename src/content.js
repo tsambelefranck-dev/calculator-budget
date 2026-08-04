@@ -129,6 +129,9 @@ export const LEAD = {
   skipLabel: 'Non merci, continuer',
   successTitle: 'C\'est envoyé !',
   successText: 'Vérifiez votre boîte mail dans quelques instants.',
+  // TODO: URL du déploiement Google Apps Script (Web App) qui écrit dans le Google Sheet.
+  // Voir README.md > "Brancher la capture de leads sur Google Sheet".
+  endpointUrl: '#TODO_GOOGLE_SHEET_WEBAPP_URL',
 };
 
 export const OFFER = {

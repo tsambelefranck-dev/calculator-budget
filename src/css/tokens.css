@@ -1,11 +1,11 @@
 :root {
-  /* Couleurs de marque — vert confiance (argent, croissance) + accent doré (aligné NexaFi Academy) */
-  --color-primary: #0b6e4f;
-  --color-primary-dark: #085239;
-  --color-primary-light: #e6f4ee;
-  --color-accent: #ff9900;
-  --color-accent-dark: #e68a00;
-  --color-accent-light: #fff4e0;
+  /* Couleurs de marque — reprises du logo NexaFi Academy (vert forêt + doré) */
+  --color-primary: #0b4d33;
+  --color-primary-dark: #073823;
+  --color-primary-light: #e5f0ea;
+  --color-accent: #c99a2e;
+  --color-accent-dark: #a67d1f;
+  --color-accent-light: #faf1dd;
 
   /* États du diagnostic */
   --color-danger: #e5484d;
