@@ -1,0 +1,18 @@
+{
+  "name": "Calculateur Budget Express",
+  "short_name": "Budget Express",
+  "description": "Découvrez en 2 minutes combien vous pourriez épargner chaque mois.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fafbfa",
+  "theme_color": "#0b6e4f",
+  "lang": "fr",
+  "dir": "ltr",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

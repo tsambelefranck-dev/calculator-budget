@@ -1,0 +1,15 @@
+{
+  "name": "calculateur-budget-express",
+  "version": "1.0.0",
+  "description": "Calculateur Budget Express - lead magnet pour le guide NexaFi Academy",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.2.0"
+  }
+}
