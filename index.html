@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <title>Calculateur Budget Express — Découvrez combien vous pouvez épargner</title>
+  <meta name="description" content="Calculez en 2 minutes votre budget mensuel et découvrez combien vous pourriez épargner chaque mois, même avec un salaire modeste." />
+  <meta name="theme-color" content="#0B6E4F" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+  <meta property="og:title" content="Calculateur Budget Express" />
+  <meta property="og:description" content="Découvrez en 2 minutes combien vous pourriez épargner chaque mois." />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="/src/css/tokens.css" />
+  <link rel="stylesheet" href="/src/css/base.css" />
+  <link rel="stylesheet" href="/src/css/layout.css" />
+  <link rel="stylesheet" href="/src/css/components.css" />
+  <link rel="stylesheet" href="/src/css/animations.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="app-header" id="app-header">
+      <div class="app-header__brand">
+        <svg class="app-header__logo" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="13" fill="none" stroke="#0b4d33" stroke-width="3" />
+          <path d="M8 20 L13 14 L17 17 L24 8" fill="none" stroke="#c99a2e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M18 8 L24 8 L24 14" fill="none" stroke="#c99a2e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="app-header__name">Budget Express</span>
+      </div>
+      <div class="app-header__progress" id="progress-root"></div>
+    </header>
+
+    <main id="screen-root" class="screen-root" aria-live="polite"></main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

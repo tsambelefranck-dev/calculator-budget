@@ -1,0 +1,61 @@
+:root {
+  /* Couleurs de marque — reprises du logo NexaFi Academy (vert forêt + doré) */
+  --color-primary: #0b4d33;
+  --color-primary-dark: #073823;
+  --color-primary-light: #e5f0ea;
+  --color-accent: #c99a2e;
+  --color-accent-dark: #a67d1f;
+  --color-accent-light: #faf1dd;
+
+  /* États du diagnostic */
+  --color-danger: #e5484d;
+  --color-danger-light: #fdeceb;
+  --color-warning: #f5a623;
+  --color-warning-light: #fef4e2;
+  --color-success: #1faa59;
+  --color-success-light: #e8f8ee;
+
+  /* Neutres */
+  --color-bg: #fafbfa;
+  --color-surface: #ffffff;
+  --color-text: #12261f;
+  --color-text-muted: #5b6b65;
+  --color-border: #e3e8e6;
+
+  /* Typo */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fs-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8rem);
+  --fs-sm: clamp(0.875rem, 0.84rem + 0.2vw, 0.95rem);
+  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.05rem);
+  --fs-lg: clamp(1.15rem, 1.08rem + 0.35vw, 1.3rem);
+  --fs-xl: clamp(1.4rem, 1.25rem + 0.75vw, 1.75rem);
+  --fs-2xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.25rem);
+
+  /* Espacements */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Forme */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Ombres */
+  --shadow-sm: 0 1px 3px rgba(18, 38, 31, 0.08);
+  --shadow-md: 0 8px 24px rgba(18, 38, 31, 0.1);
+  --shadow-lg: 0 16px 40px rgba(18, 38, 31, 0.14);
+
+  /* Rythme */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 160ms;
+  --duration-base: 280ms;
+
+  --header-height: 64px;
+  --content-max-width: 480px;
+}
