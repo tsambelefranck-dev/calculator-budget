@@ -113,6 +113,7 @@ export async function createGoal(
         amount: initialContribution.amount,
         contributedOn: initialContribution.on,
         note: 'Montant déjà épargné',
+        isOpeningBalance: true,
       });
       if (initialContribution.amount >= input.targetAmount) {
         await tx.update(savingsGoals).set({ status: 'achieved', achievedAt: new Date() }).where(eq(savingsGoals.id, goal!.id));

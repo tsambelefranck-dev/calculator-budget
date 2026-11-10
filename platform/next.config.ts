@@ -13,6 +13,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  turbopack: { root: import.meta.dirname },
+  outputFileTracingRoot: import.meta.dirname,
   poweredByHeader: false,
   reactStrictMode: true,
   serverExternalPackages: ['@node-rs/argon2', 'pg'],

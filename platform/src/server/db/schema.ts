@@ -292,6 +292,8 @@ export const goalContributions = pgTable(
     /** Positif = versement, négatif = retrait. */
     amount: money('amount').notNull(),
     contributedOn: date('contributed_on', { mode: 'string' }).notNull(),
+    /** Épargne déjà constituée avant l'ouverture de l'objectif : comptée dans le solde, pas dans les flux du mois. */
+    isOpeningBalance: boolean('is_opening_balance').notNull().default(false),
     note: text('note'),
     createdAt: createdAt(),
   },

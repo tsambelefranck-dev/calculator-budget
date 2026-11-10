@@ -1,0 +1,1 @@
+ALTER TABLE "goal_contributions" ADD COLUMN "is_opening_balance" boolean DEFAULT false NOT NULL;

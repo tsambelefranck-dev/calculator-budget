@@ -1,5 +1,5 @@
 import 'server-only';
-import { and, eq, gte, inArray, lt, sql } from 'drizzle-orm';
+import { and, eq, gte, inArray, lt, sql, type SQL } from 'drizzle-orm';
 import type { AnyPgColumn, PgTable } from 'drizzle-orm/pg-core';
 import type { PlannerBucket } from '@/lib/constants';
 import { addMonths, dayOf, daysInMonth, lastMonths, monthRange, type DateKey, type MonthKey } from '@/lib/finance/dates';
@@ -17,10 +17,11 @@ export type { MonthTotals };
 const FLOW_TABLES = {
   incomes: { table: incomes, amount: incomes.amount, date: incomes.receivedOn, user: incomes.userId },
   expenses: { table: expenses, amount: expenses.amount, date: expenses.spentOn, user: expenses.userId },
-  contributions: { table: goalContributions, amount: goalContributions.amount, date: goalContributions.contributedOn, user: goalContributions.userId },
+  contributions: { table: goalContributions, amount: sql`case when ${goalContributions.isOpeningBalance} then 0 else ${goalContributions.amount} end`, date: goalContributions.contributedOn, user: goalContributions.userId },
+  contributionBalances: { table: goalContributions, amount: goalContributions.amount, date: goalContributions.contributedOn, user: goalContributions.userId },
   movements: { table: investmentMovements, amount: investmentMovements.amount, date: investmentMovements.movedOn, user: investmentMovements.userId },
   payments: { table: debtPayments, amount: debtPayments.amount, date: debtPayments.paidOn, user: debtPayments.userId },
-} satisfies Record<string, { table: PgTable; amount: AnyPgColumn; date: AnyPgColumn; user: AnyPgColumn }>;
+} satisfies Record<string, { table: PgTable; amount: AnyPgColumn | SQL; date: AnyPgColumn; user: AnyPgColumn }>;
 
 type FlowTable = keyof typeof FLOW_TABLES;
 
@@ -210,8 +211,8 @@ export async function getNetWorthSeries(userId: string, months: MonthKey[]): Pro
   const lastEnd = monthRange(months[months.length - 1]!).end;
   const firstStart = monthRange(months[0]!).start;
   const [contribBefore, contribByMonth, movBefore, movByMonth, payBefore, payByMonth, debtRows, investmentRows] = await Promise.all([
-    sumBetween('contributions', userId, '0001-01-01', firstStart),
-    monthlySums('contributions', userId, firstStart, lastEnd),
+    sumBetween('contributionBalances', userId, '0001-01-01', firstStart),
+    monthlySums('contributionBalances', userId, firstStart, lastEnd),
     sumBetween('movements', userId, '0001-01-01', firstStart),
     monthlySums('movements', userId, firstStart, lastEnd),
     db.execute<{ debt_id: string; total: string }>(
