@@ -1,0 +1,308 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/*
+ * Jetons de design NexaFi — charte NexaFi Academy (vert forêt + or).
+ * Palette des graphiques validée (daltonisme protan/deutan, contraste ≥ 3:1)
+ * avec le validateur du skill dataviz, dans les deux modes :
+ *   clair  : #17845c · #2a78d6 · #b07d16 · #c2547f  (surface #ffffff)
+ *   sombre : #22a171 · #3987e5 · #c98500 · #d55181  (surface #141b18)
+ */
+:root {
+  color-scheme: light;
+  --bg: #f5f7f4;
+  --surface: #ffffff;
+  --surface-2: #f0f3ef;
+  --surface-3: #e7ece6;
+  --border: #e1e6e0;
+  --border-strong: #cbd3cb;
+  --text: #10201a;
+  --text-2: #475650;
+  --muted: #6f7c76;
+  --primary: #0b4d33;
+  --primary-hover: #083d28;
+  --primary-soft: #e2efe7;
+  --primary-ink: #0b4d33;
+  --on-primary: #ffffff;
+  --accent: #c99a2e;
+  --accent-soft: #f8efda;
+  --accent-ink: #855f0c;
+  --ring: #17845c;
+  --good: #0ca30c;
+  --good-ink: #006300;
+  --good-soft: #e5f4e5;
+  --warning: #fab219;
+  --warning-ink: #7a5000;
+  --warning-soft: #fdf2d8;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --critical-ink: #b02a2a;
+  --critical-soft: #fbe8e7;
+  --info-ink: #1d5fae;
+  --info-soft: #e5effb;
+  --chart-1: #17845c;
+  --chart-2: #2a78d6;
+  --chart-3: #b07d16;
+  --chart-4: #c2547f;
+  --chart-1-track: #d7ebe2;
+  --chart-grid: #e6e9e4;
+  --chart-axis: #898781;
+  --shadow-color: 16 32 26;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    color-scheme: dark;
+    --bg: #0b110f;
+    --surface: #141b18;
+    --surface-2: #1a2320;
+    --surface-3: #212c28;
+    --border: #25302b;
+    --border-strong: #34413b;
+    --text: #ebf1ed;
+    --text-2: #b5c1bb;
+    --muted: #87948e;
+    --primary: #1d7f58;
+    --primary-hover: #23946a;
+    --primary-soft: #16342a;
+    --primary-ink: #5cc597;
+    --on-primary: #ffffff;
+    --accent: #d6a940;
+    --accent-soft: #352b14;
+    --accent-ink: #e3bd62;
+    --ring: #3fbf8a;
+    --good: #0ca30c;
+    --good-ink: #46cf6d;
+    --good-soft: #15301b;
+    --warning: #fab219;
+    --warning-ink: #f6c453;
+    --warning-soft: #33280f;
+    --serious: #ec835a;
+    --critical: #e05a5a;
+    --critical-ink: #f39494;
+    --critical-soft: #3a1b1b;
+    --info-ink: #8ab9f2;
+    --info-soft: #172a40;
+    --chart-1: #22a171;
+    --chart-2: #3987e5;
+    --chart-3: #c98500;
+    --chart-4: #d55181;
+    --chart-1-track: #1d3a2f;
+    --chart-grid: #25302b;
+    --chart-axis: #898781;
+    --shadow-color: 0 0 0;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b110f;
+  --surface: #141b18;
+  --surface-2: #1a2320;
+  --surface-3: #212c28;
+  --border: #25302b;
+  --border-strong: #34413b;
+  --text: #ebf1ed;
+  --text-2: #b5c1bb;
+  --muted: #87948e;
+  --primary: #1d7f58;
+  --primary-hover: #23946a;
+  --primary-soft: #16342a;
+  --primary-ink: #5cc597;
+  --on-primary: #ffffff;
+  --accent: #d6a940;
+  --accent-soft: #352b14;
+  --accent-ink: #e3bd62;
+  --ring: #3fbf8a;
+  --good: #0ca30c;
+  --good-ink: #46cf6d;
+  --good-soft: #15301b;
+  --warning: #fab219;
+  --warning-ink: #f6c453;
+  --warning-soft: #33280f;
+  --serious: #ec835a;
+  --critical: #e05a5a;
+  --critical-ink: #f39494;
+  --critical-soft: #3a1b1b;
+  --info-ink: #8ab9f2;
+  --info-soft: #172a40;
+  --chart-1: #22a171;
+  --chart-2: #3987e5;
+  --chart-3: #c98500;
+  --chart-4: #d55181;
+  --chart-1-track: #1d3a2f;
+  --chart-grid: #25302b;
+  --chart-axis: #898781;
+  --shadow-color: 0 0 0;
+}
+
+@theme inline {
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--text);
+  --color-ink-2: var(--text-2);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-ink: var(--primary-ink);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-ring: var(--ring);
+  --color-good: var(--good);
+  --color-good-ink: var(--good-ink);
+  --color-good-soft: var(--good-soft);
+  --color-warning: var(--warning);
+  --color-warning-ink: var(--warning-ink);
+  --color-warning-soft: var(--warning-soft);
+  --color-serious: var(--serious);
+  --color-critical: var(--critical);
+  --color-critical-ink: var(--critical-ink);
+  --color-critical-soft: var(--critical-soft);
+  --color-info-ink: var(--info-ink);
+  --color-info-soft: var(--info-soft);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-1-track: var(--chart-1-track);
+  --shadow-card: 0 1px 2px rgb(var(--shadow-color) / 0.06), 0 1px 1px rgb(var(--shadow-color) / 0.03);
+  --shadow-pop: 0 12px 32px rgb(var(--shadow-color) / 0.16), 0 2px 6px rgb(var(--shadow-color) / 0.08);
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-slide-up: slide-up 220ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--primary-soft);
+  }
+  dialog::backdrop {
+    background: rgb(5 12 9 / 0.55);
+    backdrop-filter: blur(2px);
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Contenu Markdown des leçons */
+  .prose-nexafi {
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .prose-nexafi h2 {
+    font-size: 1.2rem;
+    font-weight: 650;
+    margin: 1.6rem 0 0.6rem;
+  }
+  .prose-nexafi h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 1.2rem 0 0.4rem;
+  }
+  .prose-nexafi p {
+    margin: 0.7rem 0;
+  }
+  .prose-nexafi ul,
+  .prose-nexafi ol {
+    margin: 0.6rem 0 0.6rem 1.25rem;
+  }
+  .prose-nexafi ul {
+    list-style: disc;
+  }
+  .prose-nexafi ol {
+    list-style: decimal;
+  }
+  .prose-nexafi li {
+    margin: 0.25rem 0;
+  }
+  .prose-nexafi strong {
+    font-weight: 650;
+  }
+  .prose-nexafi blockquote {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.6rem 0.9rem;
+    border-radius: 0 0.6rem 0.6rem 0;
+    margin: 1rem 0;
+  }
+  .prose-nexafi table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+  }
+  .prose-nexafi th,
+  .prose-nexafi td {
+    border-bottom: 1px solid var(--border);
+    padding: 0.45rem 0.5rem;
+    text-align: left;
+  }
+}
+
+@media print {
+  nav,
+  aside,
+  header,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+}
