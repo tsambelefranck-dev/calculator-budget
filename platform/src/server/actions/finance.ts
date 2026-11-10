@@ -1,5 +1,6 @@
 'use server';
 
+import { redirect } from 'next/navigation';
 import { formDataToObject, validationError, type ActionState } from '@/lib/action-state';
 import { budgetSchema, expenseSchema, incomeSchema, incomeSourceSchema } from '@/lib/validation/finance';
 import { monthKeySchema, uuidSchema } from '@/lib/validation/common';
@@ -172,6 +173,7 @@ export async function receiveExpectedIncomeAction(_prev: ActionState, formData: 
   const ctx = await requireAppContext();
   const sourceId = uuidSchema.safeParse(formData.get('sourceId'));
   if (!sourceId.success) return { ok: false, message: 'Source introuvable.' };
+  let incomeId: string;
   try {
     const source = await getIncomeSource(ctx.user.id, sourceId.data);
     if (!source.expectedAmount) return { ok: false, message: 'Aucun montant attendu pour cette source.' };
@@ -184,10 +186,11 @@ export async function receiveExpectedIncomeAction(_prev: ActionState, formData: 
       note: null,
     });
     refreshApp();
-    return { ok: true, message: `${source.name} enregistré. Planifie-le maintenant !`, id: income.id };
+    incomeId = income.id;
   } catch (error) {
     return toActionError(error);
   }
+  redirect(`/app/planner?income=${incomeId}`);
 }
 
 // ─── Budgets ───────────────────────────────────────────────────────────────

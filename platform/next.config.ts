@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
   turbopack: { root: import.meta.dirname },
   outputFileTracingRoot: import.meta.dirname,
   poweredByHeader: false,
+  agentRules: false,
   reactStrictMode: true,
   serverExternalPackages: ['@node-rs/argon2', 'pg'],
   async headers() {

@@ -1,7 +1,7 @@
 'use client';
 
 import { ArrowLeft, ArrowRight, CircleCheck, Sparkles, TriangleAlert } from 'lucide-react';
-import { useActionState, useEffect, useRef, useState } from 'react';
+import { useActionState, useRef, useState } from 'react';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button, ButtonLink } from '@/components/ui/button';
@@ -100,12 +100,16 @@ export function OnboardingWizard({ defaults, userName }: { defaults: OnboardingD
   const [stepError, setStepError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (!state.errors) return;
-    const firstField = Object.keys(state.errors)[0];
-    const index = STEPS.findIndex((s) => (s.fields as readonly string[]).includes(firstField ?? ''));
-    if (index >= 0) setStep(index);
-  }, [state]);
+  // Après une erreur serveur, revenir à l'étape du premier champ en erreur (ajustement pendant le rendu).
+  const [handledState, setHandledState] = useState(state);
+  if (handledState !== state) {
+    setHandledState(state);
+    if (state.errors) {
+      const firstField = Object.keys(state.errors)[0];
+      const index = STEPS.findIndex((s) => (s.fields as readonly string[]).includes(firstField ?? ''));
+      if (index >= 0) setStep(index);
+    }
+  }
 
   const validateStep = (): boolean => {
     const form = formRef.current;

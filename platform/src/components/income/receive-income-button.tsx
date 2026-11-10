@@ -1,7 +1,6 @@
 'use client';
 
 import { CircleCheck } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useActionState } from 'react';
 import { SubmitButton } from '@/components/ui/submit-button';
 import { useActionFeedback } from '@/components/ui/use-action-feedback';
@@ -10,9 +9,8 @@ import { receiveExpectedIncomeAction } from '@/server/actions/finance';
 
 /** « Marquer comme reçu » puis ouvre le planificateur avec ce revenu. */
 export function ReceiveIncomeButton({ sourceId, label = 'Marquer comme reçu' }: { sourceId: string; label?: string }) {
-  const router = useRouter();
   const [state, action] = useActionState(receiveExpectedIncomeAction, initialActionState);
-  useActionFeedback(state, { onSuccess: (s) => s.id && router.push(`/app/planner?income=${s.id}`) });
+  useActionFeedback(state);
   return (
     <form action={action}>
       <input type="hidden" name="sourceId" value={sourceId} />
