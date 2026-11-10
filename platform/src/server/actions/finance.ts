@@ -142,7 +142,8 @@ export async function saveIncomeSourceAction(id: string | null, _prev: ActionSta
   try {
     if (id) {
       if (!uuidSchema.safeParse(id).success) return { ok: false, message: 'Source introuvable.' };
-      await updateIncomeSource(ctx.user.id, id, { ...data, isActive: isActive ?? true });
+      await updateIncomeSource(ctx.user.id, id, { ...data, isActive: formData.get('isActive') === 'on' });
+      void isActive;
     } else {
       await createIncomeSource(ctx.user.id, ctx.currency, data);
     }

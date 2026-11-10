@@ -107,7 +107,7 @@ export default async function HomePage() {
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
               <ButtonLink href="/signup" variant="gold" size="lg">Faire mon diagnostic</ButtonLink>
-              <ButtonLink href="/learn" variant="outline" size="lg" className="border-white/40 bg-transparent text-white hover:bg-white/10">
+              <ButtonLink href="/app/learn" variant="outline" size="lg" className="border-white/40 bg-transparent text-white hover:bg-white/10">
                 <GraduationCap className="size-4" aria-hidden /> Leçons gratuites
               </ButtonLink>
             </div>
