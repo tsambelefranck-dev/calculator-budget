@@ -1,0 +1,61 @@
+name: Platform CI
+
+on:
+  push:
+    paths: ['platform/**', '.github/workflows/platform-ci.yml']
+  pull_request:
+    paths: ['platform/**', '.github/workflows/platform-ci.yml']
+
+concurrency:
+  group: platform-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: nexafi
+          POSTGRES_PASSWORD: nexafi
+          POSTGRES_DB: nexafi
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U nexafi" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://nexafi:nexafi@localhost:5432/nexafi
+      DATABASE_URL_TEST: postgres://nexafi:nexafi@localhost:5432/nexafi_test
+      APP_URL: http://localhost:3100
+      CRON_SECRET: ci-cron-secret-0123456789abcdef
+      AI_PROVIDER: disabled
+      SIGNUP_RATE_LIMIT_PER_HOUR: '1000'
+      DEMO_RATE_LIMIT_PER_HOUR: '1000'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: platform/package-lock.json
+      - run: npm ci
+      - name: Create test database
+        run: PGPASSWORD=nexafi psql -h localhost -U nexafi -d nexafi -c 'CREATE DATABASE nexafi_test'
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
+      - name: Migrate and seed
+        run: npm run db:setup
+      - run: npm run build
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-results
+          path: platform/test-results
+          retention-days: 7

@@ -375,7 +375,7 @@ Notch Pay, Flutterwave… Commission typique de quelques pourcents par transacti
 | 2. MVP | Auth, profil, tableau de bord, revenus, dépenses, budgets + alertes, planificateur, objectifs, dettes, agent IA, rapport mensuel | ✅ livré dans cette itération |
 | 3. Investissement | Centre d'investissement sourcé, simulateur 3 scénarios, profil de risque, éducation + quiz | ✅ livré (contenu initial à enrichir) |
 | 4. Monétisation | Freemium, essai 14 j, activation manuelle, quotas IA, back-office | ✅ partiel — intégration d'un agrégateur de paiement à faire |
-| 5. Optimisation | Tests E2E, CI, Docker, sécurité (RLS PostgreSQL, 2FA), PWA hors-ligne, API mobile `/api/v1`, notifications e-mail/WhatsApp, traduction anglaise complète | 🔜 |
+| 5. Optimisation | ✅ livré : tests d'intégration (isolation, auth, services, agent IA), E2E Playwright mobile + ordinateur, CI GitHub, Dockerfile, sauvegarde chiffrée. 🔜 à faire : RLS PostgreSQL, 2FA, PWA hors-ligne, API mobile `/api/v1`, notifications e-mail/WhatsApp, traduction anglaise complète | partiel |
 
 Étapes d'implémentation suivies :
 1. Socle (Next.js, Tailwind, Drizzle, tests) → 2. moteur de calcul + tests → 3. schéma, migrations,
