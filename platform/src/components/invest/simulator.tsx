@@ -53,13 +53,14 @@ export function Simulator({ currency, defaultInitial }: { currency: CurrencyCode
   }, [initial, monthly, years, rates, fee, inflation, currency]);
 
   const money = (v: number) => formatMoney(v, currency);
-  const chartData = result.baseline.yearly.map((y, i) => ({
+  const start = parseAmount(initial, currency) ?? 0;
+  const chartData = [{ label: 'Départ', sans_rendement: start, pessimiste: start, intermediaire: start, optimiste: start }, ...result.baseline.yearly.map((y, i) => ({
     label: `An ${y.year}`,
     sans_rendement: y.value,
     pessimiste: result.scenarios[0]!.result.yearly[i]!.value,
     intermediaire: result.scenarios[1]!.result.yearly[i]!.value,
     optimiste: result.scenarios[2]!.result.yearly[i]!.value,
-  }));
+  }))];
 
   return (
     <div className="grid gap-4 lg:grid-cols-[360px_1fr]">

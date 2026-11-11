@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
 import { themeInitScript } from '@/lib/theme';
+import { InlineScript } from '@/components/inline-script';
 import { ToastProvider } from '@/components/ui/toast';
 import './globals.css';
 
@@ -30,7 +31,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="fr" data-theme="light" suppressHydrationWarning>
       <head>
-        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <InlineScript nonce={nonce} html={themeInitScript} />
       </head>
       <body>
         <ToastProvider>{children}</ToastProvider>

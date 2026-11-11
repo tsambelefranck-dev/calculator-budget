@@ -25,7 +25,7 @@ async function openSession(userId: string, ip: string) {
 export async function signUpAction(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const values = formDataToObject(formData);
   const ip = await getClientIp();
-  const limit = await rateLimit(`signup:${ip}`, 5, 3600);
+  const limit = await rateLimit(`signup:${ip}`, Number(process.env.SIGNUP_RATE_LIMIT_PER_HOUR ?? 5), 3600);
   if (!limit.ok) return { ok: false, message: `Trop de tentatives. Réessaie dans ${formatRetryAfter(limit.retryAfterSeconds)}.` };
 
   const parsed = signUpSchema.safeParse(values);

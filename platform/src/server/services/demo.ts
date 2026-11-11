@@ -61,7 +61,7 @@ export async function createDemoAccount(): Promise<{ userId: string; expiresAt: 
       timezone,
       employmentStatus: 'salarie',
       incomeType: 'mixte',
-      monthlyIncome: 350000,
+      monthlyIncome: 410000,
       fixedCharges: 135000,
       variableExpenses: 120000,
       debtTotal: 450000,
@@ -79,7 +79,7 @@ export async function createDemoAccount(): Promise<{ userId: string; expiresAt: 
 
     const [salary] = await tx
       .insert(incomeSources)
-      .values({ userId, name: 'Salaire (démo)', type: 'salaire', isFixed: true, expectedAmount: 320000, currency, recurrence: 'monthly', payDay: 27 })
+      .values({ userId, name: 'Salaire (démo)', type: 'salaire', isFixed: true, expectedAmount: 380000, currency, recurrence: 'monthly', payDay: 27 })
       .returning({ id: incomeSources.id });
 
     const expenseRows: (typeof expenses.$inferInsert)[] = [];
@@ -89,16 +89,15 @@ export async function createDemoAccount(): Promise<{ userId: string; expiresAt: 
       ['logement', 'Électricité et eau', 8, 18000],
       ['alimentation', 'Marché', 3, 28000],
       ['alimentation', 'Marché', 12, 25000],
-      ['alimentation', 'Restaurant', 18, 15000],
-      ['alimentation', 'Marché', 23, 24000],
+      ['alimentation', 'Restaurant', 18, 10000],
       ['transport', 'Taxi et moto', 5, 12000],
-      ['transport', 'Carburant', 15, 15000],
+      ['transport', 'Carburant', 15, 10000],
       ['communication', 'Forfait internet', 1, 10000],
       ['famille', 'Soutien parents', 6, 30000],
       ['education', 'Scolarité neveu', 9, 15000],
       ['loisirs', 'Sortie entre amis', 20, 12000],
       ['abonnements', 'Abonnement TV', 4, 6000],
-      ['shopping', 'Vêtements', 14, 20000],
+      ['shopping', 'Vêtements', 14, 15000],
       ['sante', 'Pharmacie', 11, 8000],
     ];
     for (let back = 3; back >= 0; back -= 1) {
@@ -112,7 +111,7 @@ export async function createDemoAccount(): Promise<{ userId: string; expiresAt: 
         expenseRows.push({ userId, categoryId: cat(code), amount: scaled, currency, spentOn: sameDayInMonth(day, m), label, paymentMethod: code === 'logement' ? 'virement' : 'mobile_money' });
       }
       if (!isCurrent) {
-        incomeRows.push({ userId, sourceId: salary!.id, type: 'salaire', amount: 320000, currency, receivedOn: sameDayInMonth(27, m), label: 'Salaire (démo)' });
+        incomeRows.push({ userId, sourceId: salary!.id, type: 'salaire', amount: 380000, currency, receivedOn: sameDayInMonth(27, m), label: 'Salaire (démo)' });
         incomeRows.push({ userId, sourceId: null, type: 'freelance', amount: back === 1 ? 45000 : 30000, currency, receivedOn: sameDayInMonth(15, m), label: 'Mission graphisme' });
       }
     }

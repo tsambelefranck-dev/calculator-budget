@@ -111,11 +111,11 @@ export function MultiLineChart({
         <AreaChart data={data} margin={{ top: 8, right: 4, left: 0, bottom: 0 }}>
           <CartesianGrid vertical={false} stroke="var(--chart-grid)" />
           <XAxis dataKey="label" tickLine={false} axisLine={{ stroke: 'var(--chart-grid)' }} tick={AXIS} aria-label={xLabel} />
-          <YAxis tickLine={false} axisLine={false} tick={AXIS} width={56} tickFormatter={(v: number) => compact(v, currency)} />
+          <YAxis tickLine={false} axisLine={false} tick={AXIS} width={56} domain={['auto', 'auto']} tickFormatter={(v: number) => compact(v, currency)} />
           <Tooltip content={(props) => <MoneyTooltip {...(props as TooltipContentProps<number, string>)} currency={currency} />} />
           <Legend iconType="plainline" wrapperStyle={{ fontSize: 12, color: 'var(--text-2)' }} />
           {lines.map((l) => (
-            <Area key={l.key} type="monotone" dataKey={l.key} name={l.name} stroke={l.color} strokeWidth={2} fill="none" dot={false} activeDot={{ r: 4 }} />
+            <Area key={l.key} type="monotone" dataKey={l.key} name={l.name} stroke={l.color} strokeWidth={2} fill="none" dot={false} activeDot={{ r: 4 }} isAnimationActive={false} />
           ))}
         </AreaChart>
       </ResponsiveContainer>

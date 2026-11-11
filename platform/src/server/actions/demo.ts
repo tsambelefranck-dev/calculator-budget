@@ -10,7 +10,7 @@ import { createDemoAccount, DEMO_DURATION_MS } from '@/server/services/demo';
 
 export async function startDemoAction(_prev: ActionState): Promise<ActionState> {
   const ip = await getClientIp();
-  const limit = await rateLimit(`demo:${ip}`, 5, 3600);
+  const limit = await rateLimit(`demo:${ip}`, Number(process.env.DEMO_RATE_LIMIT_PER_HOUR ?? 5), 3600);
   if (!limit.ok) return { ok: false, message: `Trop de démos lancées. Réessaie dans ${formatRetryAfter(limit.retryAfterSeconds)}.` };
   const { userId } = await createDemoAccount();
   const { token, expiresAt } = await createSession(userId, { ip, userAgent: await getUserAgent(), durationMs: DEMO_DURATION_MS });
